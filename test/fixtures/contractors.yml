@@ -3,7 +3,19 @@
 one:
   full_name: MyString
   role: MyString
+  location: MyString
+  joined_on: 2023-10-06
+  hourly_rate: 1.5
+  hours_per_week: 1
+  weeks_per_year: 1
+  stock_options_percentage: 1.5
 
 two:
   full_name: MyString
   role: MyString
+  location: MyString
+  joined_on: 2023-10-06
+  hourly_rate: 1.5
+  hours_per_week: 1
+  weeks_per_year: 1
+  stock_options_percentage: 1.5

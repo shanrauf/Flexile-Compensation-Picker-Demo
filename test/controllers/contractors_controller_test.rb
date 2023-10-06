@@ -12,7 +12,7 @@ class ContractorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create contractor" do
     assert_difference("Contractor.count") do
-      post contractors_url, params: { contractor: { full_name: @contractor.full_name, role: @contractor.role } }, as: :json
+      post contractors_url, params: { contractor: { full_name: @contractor.full_name, hourly_rate: @contractor.hourly_rate, hours_per_week: @contractor.hours_per_week, joined_on: @contractor.joined_on, location: @contractor.location, role: @contractor.role, stock_options_percentage: @contractor.stock_options_percentage, weeks_per_year: @contractor.weeks_per_year } }, as: :json
     end
 
     assert_response :created
@@ -24,7 +24,7 @@ class ContractorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update contractor" do
-    patch contractor_url(@contractor), params: { contractor: { full_name: @contractor.full_name, role: @contractor.role } }, as: :json
+    patch contractor_url(@contractor), params: { contractor: { full_name: @contractor.full_name, hourly_rate: @contractor.hourly_rate, hours_per_week: @contractor.hours_per_week, joined_on: @contractor.joined_on, location: @contractor.location, role: @contractor.role, stock_options_percentage: @contractor.stock_options_percentage, weeks_per_year: @contractor.weeks_per_year } }, as: :json
     assert_response :success
   end
 

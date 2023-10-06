@@ -1,0 +1,18 @@
+.flexile-button {
+  background-image: linear-gradient(160deg, rgba(213,220,158,1) 0%, rgba(163,206,145,1) 32%, rgba(109,191,130,1) 100%);
+  margin: 10px;
+  padding: 5px 40px;
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: black;          
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.flexile-button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}

@@ -1,0 +1,107 @@
+.popup-content {
+  max-width: fit-content;
+  border-radius: 10px;
+}
+.modal {
+  font-size: 12px;
+  width: 350px;
+  height: 760px;
+  padding: 0 25px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 20px;
+  text-align: left;
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.hourly-rate-input {
+  width: 100%;
+  height: 30px;
+  border-radius: 3px;
+  background-color: #f4f5f7;
+  margin-bottom: 10px;
+  padding: 0 0 0 10px;
+  border: 1px solid #cfcece;
+}
+
+.small-input {
+  width: 40px;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding-left: 7px;
+  margin-left: 15px;
+}
+
+.slider-and-input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.input-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.equity-switch-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.equity-switch-label {
+  margin: 4px 0 0 10px;
+  font-size: 14px;
+}
+
+.equity-container {
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 10px;
+  width: 100%;
+  max-height: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.total-comp-container {
+  padding-top: 15px;
+  width: 100%;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total-comp-container > h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+}
+.total-comp-container > h3 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 600;
+}
