@@ -55,7 +55,7 @@ function CompensationEditor(props) {
     if (hourlyRate < minHourlyRate || hourlyRate > maxHourlyRate) {
       errors.push("Hourly rate ($)")
     }
-    if (hoursPerWeek < minHourlyRate || hoursPerWeek > maxHourlyRate) {
+    if (hoursPerWeek < minHoursPerWeek || hoursPerWeek > maxHoursPerWeek) {
       errors.push("Hours/wk")
     }
     if (weeksPerYear < minWeeksPerYear || weeksPerYear > maxWeeksPerYear) {
