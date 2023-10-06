@@ -1,5 +1,6 @@
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch
-import "../rounded_switch.css";
+import "./rounded_switch.css";
+
 function RoundedSwitch(props) {
   return (
     <label className="switch">

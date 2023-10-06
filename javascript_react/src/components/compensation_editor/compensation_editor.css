@@ -5,12 +5,19 @@
 .modal {
   font-size: 12px;
   width: 350px;
-  height: 760px;
+  height: 850px;
+  overflow: hidden;
+  transition: height 0.2s ease-out;
   padding: 0 25px;
 }
+
+#no-equity {
+  height: 430px;
+}
+
 .modal > .header {
   width: 100%;
-  font-size: 20px;
+  font-size: 22px;
   text-align: left;
 }
 
@@ -40,8 +47,12 @@
   border-radius: 3px;
   background-color: #f4f5f7;
   margin-bottom: 10px;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 20px;
   border: 1px solid #cfcece;
+
+  /* Giga brain solution from https://stackoverflow.com/questions/2913236/html-text-input-field-with-currency-symbol to have a symbol LMAOOO */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='25px' width='85px'><text x='10' y='18' fill='black' font-size='13' font-family='arial'>$</text></svg>");
+  background-repeat: no-repeat;
 }
 
 .small-input {
@@ -53,6 +64,14 @@
   margin-left: 15px;
 }
 
+#small-input-percentage {
+  /* Needs to be slightly larger for "100%" */
+  width: 50px;
+  /* Giga brain solution from https://stackoverflow.com/questions/2913236/html-text-input-field-with-currency-symbol to have a symbol LMAOOO */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='25px' width='85px'><text x='31' y='18' fill='black' font-size='13' font-family='arial'>%</text></svg>");
+  background-repeat: no-repeat;
+}
+
 .slider-and-input-container {
   width: 100%;
   display: flex;
@@ -61,6 +80,7 @@
 }
 
 .input-label {
+  font-size: 12px;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -78,12 +98,17 @@
 
 .equity-container {
   font-size: 14px;
+  line-height: 1.5;
   margin-top: 15px;
-  padding: 10px;
+  padding: 20px 15px;
   width: 100%;
   max-height: fit-content;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.equity-container > p {
+  margin-top: 0;
 }
 
 .total-comp-container {
@@ -97,11 +122,21 @@
 
 .total-comp-container > h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
 }
 .total-comp-container > h3 {
   margin: 0;
   font-size: 50px;
   font-weight: 600;
+}
+
+.calculation-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.implied-hourly-rate-container {
+  margin-top: 10px;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../flexile_button.css';
+import './flexile_button.css';
 
 function FlexileButton(props) {
   return (

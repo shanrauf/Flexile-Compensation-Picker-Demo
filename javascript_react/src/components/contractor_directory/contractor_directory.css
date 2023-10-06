@@ -64,7 +64,6 @@
 }
 
 .row .cell {
-  font-family: Poppins-Regular;
   font-size: 15px;
   color: #666;
   line-height: 1.2;
@@ -75,7 +74,6 @@
 }
 
 .row.header .cell {
-  font-family: Poppins-Regular;
   font-size: 18px;
   color: #fff;
   line-height: 1.2;
@@ -93,11 +91,11 @@
 }
 
 .row .cell:nth-child(3) {
-  width: 150px
+  width: 180px
 }
 
 .row .cell:nth-child(4) {
-  width: 150px
+  width: 200px
 }
 
 .row .cell:nth-child(5) {
@@ -113,12 +111,12 @@
 }
 
 .row .cell:nth-child(8) {
-  width: 100px;
+  width: 90px;
 }
 
 .row .cell:nth-child(9) {
-  width: 100px;
-  padding-right: 10px;
+  width: 90px;
+  padding-right: 5px;
 }
 
 
@@ -126,7 +124,7 @@
   width: 100%!important
 }
 
-.row:hover {
+.table-body-row:hover {
   background-color: #ececff;
   cursor: pointer
 }
@@ -152,7 +150,6 @@
   }
 
   .row .cell {
-      font-family: Poppins-Regular;
       font-size: 18px;
       color: #555;
       line-height: 1.2;

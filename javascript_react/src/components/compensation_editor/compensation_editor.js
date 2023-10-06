@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { toast } from 'react-toastify';
 
-import RoundedSwitch from "./rounded_switch";
-import RangeSlider from "./range_slider";
-import '../compensation_editor.css';
-import FlexileButton from './flexile_button';
+import RoundedSwitch from "../rounded_switch/rounded_switch";
+import RangeSlider from "../range_slider/range_slider";
+import FlexileButton from '../flexile_button/flexile_button';
+import './compensation_editor.css';
 
 const minHourlyRate = 0
 const maxHourlyRate = 1000
@@ -13,6 +14,15 @@ const minWeeksPerYear = 26;
 const maxWeeksPerYear = 52;
 const minStockPercentage = 0;
 const maxStockPercentage = 100;
+const eightyMillion = 80000000; // A $100M valuation at a 20% discount
+const hundredMillion = 100000000; // A $100M valuation
+
+function calculateCashPerHour(hourlyRate, stockOptionsPercentage) {
+  return (100 - stockOptionsPercentage) / 100 * hourlyRate
+}
+function calculateDollarValueOfOptionsPerHour(hourlyRate, stockOptionsPercentage) {
+  return (stockOptionsPercentage / 100 * hourlyRate) / eightyMillion * hundredMillion
+}
 
 function CompensationEditor(props) {
   const [wantsSomeSalaryAsEquity, setWantsSomeSalaryAsEquity] = useState(props.contractor.stock_options_percentage > 0);
@@ -20,17 +30,27 @@ function CompensationEditor(props) {
   const [hoursPerWeek, setHoursPerWeek] = useState(props.contractor.hours_per_week);
   const [weeksPerYear, setWeeksPerYear] = useState(props.contractor.weeks_per_year);
   const [stockOptionsPercentage, setStockOptionsPercentage] = useState(props.contractor.stock_options_percentage);
-  const handleSwitchChange = (value) => {
-    setWantsSomeSalaryAsEquity(value);
-  };
-  const handleNumericalInput = (value, callback) => {
-    if (!/^-?\d+$/.test(value)) return;
 
-    const number = parseInt(value);
-    callback(number)
+  const handleEquitySwitch = () => {
+    if (wantsSomeSalaryAsEquity) {
+      // Now you don't want equity; set stock options % to 0:
+      setStockOptionsPercentage(0)
+    }
+    else {
+      // Now you want equity; let's default to 50%
+      setStockOptionsPercentage(50)
+    }
+    setWantsSomeSalaryAsEquity(!wantsSomeSalaryAsEquity)
   }
 
-  const handleSubmitCompensation = (parentCallback) => {
+  const handleNumericalInput = (value, callback) => {
+    if (value === "") callback(0)
+    else if (value.startsWith("-")) return
+    else if (!/^-?\d+$/.test(value)) return
+    else callback(parseInt(value))
+  }
+
+  const handleSubmitCompensation = () => {
     const errors = []
     if (hourlyRate < minHourlyRate || hourlyRate > maxHourlyRate) {
       errors.push("Hourly rate ($)")
@@ -45,22 +65,32 @@ function CompensationEditor(props) {
       errors.push("Stock %")
     }
     if (errors.length) {
-      console.log(errors)
+      toast.error(
+        "The following field(s) are invalid: " + errors.join(", "),
+        { position: toast.POSITION.BOTTOM_CENTER });
     }
     else {
-      parentCallback({
-        errors,
-        hourlyRate,
-        hoursPerWeek,
-        weeksPerYear,
-        stockOptionsPercentage
+      props.onSubmit({
+        hourly_rate: hourlyRate,
+        hours_per_week: hoursPerWeek,
+        weeks_per_year: weeksPerYear,
+        stock_options_percentage: stockOptionsPercentage
       })
+      toast.success(
+        "Successfully updated copmensation for " + props.contractor.full_name,
+        { position: toast.POSITION.BOTTOM_CENTER });
       props.close();
     }
   }
 
+  const cashPerHour = calculateCashPerHour(hourlyRate, stockOptionsPercentage);
+  const dollarValueOfOptionsPerHour = calculateDollarValueOfOptionsPerHour(hourlyRate, stockOptionsPercentage);
+  const cashBonusToExerciseOptions = ((37/100) * dollarValueOfOptionsPerHour);
+  const impliedHourlyRate = (cashPerHour + dollarValueOfOptionsPerHour + cashBonusToExerciseOptions);
+  const impliedTotalComp = impliedHourlyRate * hoursPerWeek * weeksPerYear / 1000;
+
   return (
-    <div className="modal">
+    <div className="modal" id={wantsSomeSalaryAsEquity ? null : "no-equity"}>
       <button className="close" onClick={props.close}>
         &times;
       </button>
@@ -99,7 +129,7 @@ function CompensationEditor(props) {
             onChange={e => handleNumericalInput(e.target.value, setWeeksPerYear)} />
       </div>
         <div className="equity-switch-container">
-          <RoundedSwitch checked={wantsSomeSalaryAsEquity} onChange={handleSwitchChange} />
+          <RoundedSwitch checked={wantsSomeSalaryAsEquity} onChange={handleEquitySwitch} />
           <label className="equity-switch-label">Take some as equity</label>
       </div>
       {wantsSomeSalaryAsEquity && <div className="equity-container">
@@ -119,18 +149,32 @@ function CompensationEditor(props) {
             onChange={value => setStockOptionsPercentage(value)}/>
           <input
             className="small-input"
+            id="small-input-percentage"
             type="text"
             value={stockOptionsPercentage}
-            onChange={e => handleNumericalInput(e.target.value, setStockOptionsPercentage)} />
+            onChange={e => { handleNumericalInput(e.target.value, setStockOptionsPercentage) }} />
+          
         </div>
-        <label>Cash</label>
-        <label>Options at $100M</label>
-        <label>Cash bonus at $37M</label>
-        <label>Implied hourly rate</label>
+        <div className="calculation-container">
+          <label>Cash</label>
+          <label>${cashPerHour.toFixed(2)}/hr</label>
+        </div>
+        <div className="calculation-container">
+          <label>Options at $100M</label>
+          <label>${dollarValueOfOptionsPerHour.toFixed(2)}/hr</label>
+        </div>
+        <div className="calculation-container">
+          <label>Cash bonus at $37M</label>
+          <label>${cashBonusToExerciseOptions.toFixed(2)}/hr</label>
+        </div>
+        <div className="calculation-container implied-hourly-rate-container">
+           <label>Implied hourly rate</label>
+          <label><strong>${impliedHourlyRate.toFixed(2)}/hr</strong></label>
+        </div>
       </div>}
       <div className="total-comp-container">
-        <h2>Total Comp</h2>
-        <h3>$238k/yr</h3>
+        <h2>TOTAL COMP</h2>
+        <h3>${impliedTotalComp.toFixed(1)}k/yr</h3>
           <FlexileButton
             text="Submit"
             onClick={handleSubmitCompensation} />

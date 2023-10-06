@@ -6,7 +6,6 @@
   border-radius: 5px;  
   background: #fa92e6;
   outline: none;
-  opacity: 0.9;
 }
 
 .slider::-webkit-slider-thumb {
@@ -32,6 +31,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
+  margin-top: 4px;
   padding: 0;
   list-style: none;
 }
