@@ -7,6 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
+    # TODO: Swap this URL to the production URL when building for production (environment variable)
     origins "http://localhost:3001"
 
     resource "*",

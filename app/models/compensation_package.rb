@@ -1,0 +1,2 @@
+class CompensationPackage < ApplicationRecord
+end

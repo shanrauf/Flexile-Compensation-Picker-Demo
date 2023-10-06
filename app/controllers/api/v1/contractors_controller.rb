@@ -46,6 +46,6 @@ class Api::V1::ContractorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contractor_params
-      params.require(:contractor).permit(:full_name, :role)
+      params.require(:contractor).permit(:full_name, :role, :location, :joined_on, :hourly_rate, :hours_per_week, :weeks_per_year, :stock_options_percentage)
     end
 end

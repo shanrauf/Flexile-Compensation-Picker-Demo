@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_06_071402) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_06_080832) do
+  create_table "compensation_packages", force: :cascade do |t|
+    t.string "label"
+    t.float "stock_options_percentage"
+    t.integer "hours_per_week"
+    t.integer "weeks_per_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contractors", force: :cascade do |t|
     t.string "full_name"
     t.string "role"
+    t.string "location"
+    t.date "joined_on"
+    t.float "hourly_rate"
+    t.integer "hours_per_week"
+    t.integer "weeks_per_year"
+    t.float "stock_options_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
