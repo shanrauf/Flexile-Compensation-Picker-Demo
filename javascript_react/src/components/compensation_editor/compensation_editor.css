@@ -5,28 +5,23 @@
 .modal {
   font-size: 12px;
   width: 350px;
-  height: 850px;
-  overflow: hidden;
+  height: 775px;
+  max-height: calc(100vh - 15px);
+  overflow-y: hidden;
   transition: height 0.2s ease-out;
   padding: 0 25px;
 }
 
 #no-equity {
-  height: 430px;
+  height: 400px;
 }
 
 .modal > .header {
   width: 100%;
-  font-size: 22px;
+  font-size: 20px;
   text-align: left;
 }
 
-.modal > .actions {
-  width: 100%;
-  padding: 10px 5px;
-  margin: auto;
-  text-align: center;
-}
 .modal > .close {
   cursor: pointer;
   position: absolute;
@@ -46,7 +41,7 @@
   height: 30px;
   border-radius: 3px;
   background-color: #f4f5f7;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding: 0 0 0 20px;
   border: 1px solid #cfcece;
 
@@ -76,7 +71,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .input-label {
@@ -98,8 +93,8 @@
 
 .equity-container {
   font-size: 14px;
-  line-height: 1.5;
-  margin-top: 15px;
+  line-height: 1.3;
+  margin-top: 10px;
   padding: 20px 15px;
   width: 100%;
   max-height: fit-content;
@@ -126,8 +121,8 @@
   font-weight: 400;
 }
 .total-comp-container > h3 {
-  margin: 0;
-  font-size: 50px;
+  margin: 0 0 10px 0;
+  font-size: 40px;
   font-weight: 600;
 }
 
@@ -139,4 +134,10 @@
 
 .implied-hourly-rate-container {
   margin-top: 10px;
+}
+
+@media (max-height: 800px) {
+  .modal {
+    overflow-y: auto;
+  }
 }
