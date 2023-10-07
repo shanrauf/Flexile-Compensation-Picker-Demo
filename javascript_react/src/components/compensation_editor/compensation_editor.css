@@ -2,7 +2,7 @@
   font-size: 12px;
   width: 350px;
   height: 775px;
-  max-height: calc(100vh - 15px);
+  max-height: calc(100vh - 40px);
   overflow-y: hidden;
   transition: height 0.2s ease-out;
   padding: 0 25px;

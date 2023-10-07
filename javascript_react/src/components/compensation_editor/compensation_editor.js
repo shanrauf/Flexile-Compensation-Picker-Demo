@@ -52,18 +52,18 @@ function CompensationEditor(props) {
 
   const handleSubmitCompensation = () => {
     const errors = []
-    if (hourlyRate < minHourlyRate || hourlyRate > maxHourlyRate) {
-      errors.push("Hourly rate ($)")
-    }
-    if (hoursPerWeek < minHoursPerWeek || hoursPerWeek > maxHoursPerWeek) {
-      errors.push("Hours/wk")
-    }
-    if (weeksPerYear < minWeeksPerYear || weeksPerYear > maxWeeksPerYear) {
-      errors.push("Weeks/yr")
-    }
-    if (stockOptionsPercentage < minStockPercentage || stockOptionsPercentage > maxStockPercentage) {
-      errors.push("Stock %")
-    }
+    if (hourlyRate < minHourlyRate) errors.push("Hourly Rate is too low")
+    else if (hourlyRate > maxHourlyRate) errors.push("Hourly Rate is too high")
+
+    if (hoursPerWeek < minHoursPerWeek) errors.push("Hours/Wk too low")
+    else if (hoursPerWeek > maxHoursPerWeek) errors.push("Hours/Wk is too high")
+
+    if (weeksPerYear < minWeeksPerYear) errors.push("Weeks/Yr too low")
+    else if (weeksPerYear > maxWeeksPerYear) errors.push("Weeks/Yr is too high")
+
+    if (stockOptionsPercentage < minStockPercentage) errors.push("Stock % is too low")
+    else if (stockOptionsPercentage > maxStockPercentage) errors.push("Stock % is too high")
+
     if (errors.length) {
       toast.error(
         "The following field(s) are invalid: " + errors.join(", "),

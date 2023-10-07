@@ -10,12 +10,9 @@ function ContractorDirectory(props) {
   const [contractors, setContractors] = useState([...props.contractors])
   const activeContractor = useRef(null);
   const activeContractorIdx = useRef(null);
+  const [tableCanScroll, setTableCanScroll] = useState(true);
   const [editorIsOpen, setEditorIsOpen] = useState(false);
-  const openEditor = (contractor, idx) => {
-    activeContractorIdx.current = idx;
-    activeContractor.current = contractor;
-    setEditorIsOpen(true)
-  }
+
   const updateContractorData = (payload) => {
     const new_contractors = [...props.contractors];
     const contractor_at_idx = new_contractors[activeContractorIdx.current];
@@ -24,6 +21,18 @@ function ContractorDirectory(props) {
     contractor_at_idx.weeks_per_year = payload.weeks_per_year;
     contractor_at_idx.stock_options_percentage = payload.stock_options_percentage;
     setContractors(new_contractors);
+  }
+
+  const togglePopup = () => {
+    // TODO was trying style={{overflow: tableCanScroll ? null : "hidden"}} but i need this way up in component tree, not here
+    setTableCanScroll(!tableCanScroll)
+    setEditorIsOpen(!editorIsOpen)
+  }
+  
+  const openEditor = (contractor, idx) => {
+    activeContractorIdx.current = idx;
+    activeContractor.current = contractor;
+    togglePopup();
   }
 
   return (
@@ -75,7 +84,7 @@ function ContractorDirectory(props) {
     <Popup
       open={editorIsOpen}
       closeOnDocumentClick
-      onClose={() => setEditorIsOpen(false)}
+        onClose={togglePopup}
       modal>
         {close =>
           <CompensationEditor
