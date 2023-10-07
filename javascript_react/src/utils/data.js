@@ -34,9 +34,9 @@ export const contractor_data = [
   },
   {
     id: 4,
-    full_name: "Alice Mccarthy",
+    full_name: "Alice",
     role: "Designer",
-    location: "Modesto, CA",
+    location: "In Wonderland",
     joined_on: "February 2nd, 2021",
     hourly_rate: 105.0,
     hours_per_week: 25,
@@ -45,7 +45,7 @@ export const contractor_data = [
   },
   {
     id: 5,
-    full_name: "Bob Hunt",
+    full_name: "Bob the Builder",
     role: "Designer",
     location: "Austin, TX",
     joined_on: "July 13th, 2021",
