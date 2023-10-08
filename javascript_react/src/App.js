@@ -28,6 +28,7 @@ function App() {
           <h2>
             Github:{" "}
             <a
+              className="github-link"
               target="_blank"
               rel="noreferrer"
               href="https://github.com/shanrauf/Flexile-Compensation-Picker-Demo"

@@ -41,3 +41,7 @@
  overflow-y: hidden;
  height: 100%;
 }
+
+.github-link {
+  word-wrap: break-word;
+}
