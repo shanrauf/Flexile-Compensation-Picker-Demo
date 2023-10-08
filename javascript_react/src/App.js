@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   // eslint-disable-next-line
-  const [activeContractorInfo, setActiveContractorInfo] = useState(null)
+  const [activeContractorInfo, setActiveContractorInfo] = useState({contractor: contractor_data[0], idx: 0})
 
   // Disable scrolling of the table (mainly for mobile) when popup enabled
   useEffect(() => {

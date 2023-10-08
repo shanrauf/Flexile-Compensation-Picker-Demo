@@ -5,8 +5,9 @@ import 'reactjs-popup/dist/index.css';
 
 import CompensationEditor from "../compensation_editor/compensation_editor";
 import FlexileButton from '../flexile_button/flexile_button';
-import './contractor_directory.css';
 import { ActiveContractorContext } from '../../utils/ActiveContractorContext';
+import './contractor_directory.css';
+import '../popup.css';
 
 function ContractorDirectory(props) {
   const [contractors, setContractors] = useState([...props.contractors])
