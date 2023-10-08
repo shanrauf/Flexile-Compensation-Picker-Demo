@@ -76,10 +76,6 @@ function CompensationEditor(props) {
         weeks_per_year: weeksPerYear,
         stock_options_percentage: stockOptionsPercentage
       })
-      toast.success(
-        "Successfully updated copmensation for " + props.contractor.full_name,
-        { position: toast.POSITION.BOTTOM_CENTER });
-      props.close();
     }
   }
 

@@ -90,13 +90,8 @@
   width: 150px;
 }
 
-.table,.row {
-  width: 100%!important
-}
-
 .table-body-row:hover {
   background-color: #ececff;
-  cursor: pointer
 }
 
 @media(max-width: 768px) {

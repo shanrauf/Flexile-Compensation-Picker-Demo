@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Popup from 'reactjs-popup';
+import { toast } from 'react-toastify';
 import 'reactjs-popup/dist/index.css';
 
 import CompensationEditor from "../compensation_editor/compensation_editor";
@@ -8,31 +9,22 @@ import './contractor_directory.css';
 
 function ContractorDirectory(props) {
   const [contractors, setContractors] = useState([...props.contractors])
-  const activeContractor = useRef(null);
-  const activeContractorIdx = useRef(null);
-  const [tableCanScroll, setTableCanScroll] = useState(true);
-  const [editorIsOpen, setEditorIsOpen] = useState(false);
+  const [activeContractorInfo, setActiveContractorInfo] = useState(null) // {idx: number, contractor: {...}}
 
-  const updateContractorData = (payload) => {
+  const updateContractorData = (new_contractor_data) => {
     const new_contractors = [...props.contractors];
-    const contractor_at_idx = new_contractors[activeContractorIdx.current];
-    contractor_at_idx.hourly_rate = payload.hourly_rate;
-    contractor_at_idx.hours_per_week = payload.hours_per_week;
-    contractor_at_idx.weeks_per_year = payload.weeks_per_year;
-    contractor_at_idx.stock_options_percentage = payload.stock_options_percentage;
+    const contractor_at_idx = {...new_contractors[activeContractorInfo.idx]};
+    contractor_at_idx.hourly_rate = new_contractor_data.hourly_rate;
+    contractor_at_idx.hours_per_week = new_contractor_data.hours_per_week;
+    contractor_at_idx.weeks_per_year = new_contractor_data.weeks_per_year;
+    contractor_at_idx.stock_options_percentage = new_contractor_data.stock_options_percentage;
+    new_contractors[activeContractorInfo.idx] = contractor_at_idx;
     setContractors(new_contractors);
-  }
 
-  const togglePopup = () => {
-    // TODO was trying style={{overflow: tableCanScroll ? null : "hidden"}} but i need this way up in component tree, not here
-    setTableCanScroll(!tableCanScroll)
-    setEditorIsOpen(!editorIsOpen)
-  }
-  
-  const openEditor = (contractor, idx) => {
-    activeContractorIdx.current = idx;
-    activeContractor.current = contractor;
-    togglePopup();
+    setActiveContractorInfo(null)
+    toast.success(
+      "Successfully updated copmensation for " + contractor_at_idx.full_name,
+      { position: toast.POSITION.BOTTOM_CENTER });
   }
 
   return (
@@ -76,22 +68,19 @@ function ContractorDirectory(props) {
             {contractor.stock_options_percentage}%
           </div>
           <div className="cell" data-title="Action">
-            <FlexileButton text="Edit" onClick={() => {openEditor(contractor, idx)}} />
+            <FlexileButton text="Edit" onClick={() => setActiveContractorInfo({contractor, idx})} />
           </div>
         </div>
       })}
     </div>
-    <Popup
-      open={editorIsOpen}
+    {activeContractorInfo && <Popup
+      open={activeContractorInfo}
       closeOnDocumentClick
-        onClose={togglePopup}
       modal>
-        {close =>
-          <CompensationEditor
-            contractor={activeContractor.current}
-            close={close}
-            onSubmit={updateContractorData} />}
-    </Popup>
+        <CompensationEditor
+          contractor={activeContractorInfo.contractor}
+          onSubmit={updateContractorData} />
+    </Popup>}
   </div>
   )
 }
