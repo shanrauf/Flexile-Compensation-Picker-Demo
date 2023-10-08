@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Popup from 'reactjs-popup';
 import { toast } from 'react-toastify';
 import 'reactjs-popup/dist/index.css';
@@ -6,10 +6,11 @@ import 'reactjs-popup/dist/index.css';
 import CompensationEditor from "../compensation_editor/compensation_editor";
 import FlexileButton from '../flexile_button/flexile_button';
 import './contractor_directory.css';
+import { ActiveContractorContext } from '../../utils/ActiveContractorContext';
 
 function ContractorDirectory(props) {
   const [contractors, setContractors] = useState([...props.contractors])
-  const [activeContractorInfo, setActiveContractorInfo] = useState(null) // {idx: number, contractor: {...}}
+  const {activeContractorInfo, setActiveContractorInfo} = useContext(ActiveContractorContext)
 
   const updateContractorData = (new_contractor_data) => {
     const new_contractors = [...props.contractors];
@@ -73,13 +74,17 @@ function ContractorDirectory(props) {
         </div>
       })}
     </div>
-    {activeContractorInfo && <Popup
+    {activeContractorInfo?.contractor && <Popup
       open={activeContractorInfo}
       closeOnDocumentClick
+      onClose={() => setActiveContractorInfo(null)}
       modal>
-        <CompensationEditor
+        {close => (
+          <CompensationEditor
           contractor={activeContractorInfo.contractor}
+          close={close}
           onSubmit={updateContractorData} />
+        )}
     </Popup>}
   </div>
   )
