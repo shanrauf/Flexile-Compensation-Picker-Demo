@@ -6,6 +6,7 @@
   border-radius: 5px;  
   background: #fa92e6;
   outline: none;
+  cursor: pointer;
 }
 
 .slider::-webkit-slider-thumb {
@@ -16,7 +17,6 @@
   border: 1px solid black;
   border-radius: 50%; 
   background: #fa92e6;
-  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
