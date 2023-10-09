@@ -25,7 +25,7 @@ function ContractorDirectory(props) {
 
     setActiveContractorInfo(null)
     toast.success(
-      "Successfully updated copmensation for " + contractor_at_idx.full_name,
+      "Successfully updated compensation for " + contractor_at_idx.full_name,
       { position: toast.POSITION.BOTTOM_CENTER });
   }
 
