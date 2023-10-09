@@ -12,5 +12,5 @@ Demo here: [https://flexile-compensation-demo.netlify.app/](https://flexile-comp
 
 ## Notes
 
-- Unsure if my math is correct on the cash bonus; my value is $0.91 cents higher than Sahil's value but... Maybe he did the  math roughly in his head?
+- Unsure if my math is correct on the cash bonus; my value is $0.91 cents higher than Sahil's value but... Maybe he did the math roughly in his head?
 - Design-wise, the gigantic total comp number isn't great I think? It obscures actual yearly cash, how much it'd cost to exericse options, etc
